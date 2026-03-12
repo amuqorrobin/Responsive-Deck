@@ -47,18 +47,39 @@ function App() {
   }, []);
 
   return (
-    <section className="px-8 py-6 max-w-87.5 min-w-80 mx-auto">
-      <div className="">
-        <h1 className="text-xl mb-2 font-roboto_mono">Currently active URL </h1>
+    <section className="px-8 py-6  min-w-80 max-w-90 mx-auto">
+      <div className="text-center">
+        <h1 className="text-xl mb-2 ">Currently active URL </h1>
 
         {isloading && (
           <Loader className="text-primary animate-spin [animation-duration:1.6s]" />
         )}
         {error && <p className="text-sm text-red-500">{error}</p>}
         {!isloading && !error && (
-          <p className="text-sm text-gray-500">{currentTabUrl}</p>
+          <div className={""}>
+            <p className="text-sm text-gray-500 font-roboto_mono text-center  text-ellipsis truncate ">
+              {currentTabUrl}
+            </p>
+          </div>
         )}
       </div>
+
+      {!error && !isloading && (
+        <div className="mt-6 flex items-center justify-center gap-2">
+          <button
+            className="py-2 px-4 bg-tertiary text-white font-poppins text-sm cursor-pointer rounded-md
+          "
+          >
+            Go with current URL
+          </button>
+          <button
+            className="py-2 px-4 bg-primary text-white font-poppins text-sm cursor-pointer rounded-md
+          "
+          >
+            Open Dashboard
+          </button>
+        </div>
+      )}
     </section>
   );
 }
