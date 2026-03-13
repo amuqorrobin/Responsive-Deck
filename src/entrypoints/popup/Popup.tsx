@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import ResponsiveDeck from "@/assets/responsiveDeck.svg";
 import { Loader } from "lucide-react";
 
-function App() {
+function PopupPage() {
   const [currentTabUrl, setCurrentTabUrl] = useState("");
   const [error, setError] = useState("");
   const [isloading, setIsloading] = useState(false);
@@ -84,4 +84,4 @@ function App() {
   );
 }
 
-export default App;
+export default PopupPage;
