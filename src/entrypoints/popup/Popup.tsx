@@ -1,9 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 import ResponsiveDeck from "@/assets/responsiveDeck.svg";
 import { Loader } from "lucide-react";
+import {
+  getRegisteredOptionsPath,
+  isSameExtensionPage,
+} from "@/utils/urlMatch";
 
 function PopupPage() {
   const [currentTabUrl, setCurrentTabUrl] = useState("");
@@ -46,6 +50,60 @@ function PopupPage() {
     };
   }, []);
 
+  const [isOnOptionsPage, setIsOnOptionsPage] = useState(false);
+  const optionsUrl = useMemo(() => {
+    const path = getRegisteredOptionsPath();
+    return path ? browser.runtime.getURL(path) : "";
+  }, []);
+
+  useEffect(() => {
+    const checkActiveTab = async () => {
+      const [tab] = await browser.tabs.query({
+        active: true,
+        currentWindow: true,
+      });
+
+      const url = tab?.url ?? "";
+
+      setCurrentTabUrl(url);
+      if (!optionsUrl) {
+        setIsOnOptionsPage(false);
+        return;
+      }
+
+      setIsOnOptionsPage(isSameExtensionPage(url, optionsUrl));
+    };
+
+    checkActiveTab();
+  }, [optionsUrl]);
+
+  const openOrFocusToResponsiveDeck = async () => {
+    if (isOnOptionsPage) return;
+
+    const tabs = await browser.tabs.query({});
+    const existingTab = tabs.find((tab) => {
+      const url = tab.url ?? "";
+      return isSameExtensionPage(url, optionsUrl);
+    });
+
+    if (!existingTab) {
+      const newTab = await browser.tabs.create({
+        url: optionsUrl,
+        active: true,
+      });
+
+      if (newTab.windowId != null) {
+        await browser.windows.update(newTab.windowId, { focused: true });
+      }
+    } else {
+      await browser.tabs.update(existingTab?.id, { active: true });
+
+      if (existingTab?.windowId != null) {
+        await browser.windows.update(existingTab.windowId, { focused: true });
+      }
+    }
+  };
+
   return (
     <section className="px-8 py-6  min-w-80 max-w-90 mx-auto">
       <div className="text-center">
@@ -75,6 +133,7 @@ function PopupPage() {
           <button
             className="py-2 px-4 bg-primary text-white font-poppins text-sm cursor-pointer rounded-md
           "
+            onClick={openOrFocusToResponsiveDeck}
           >
             Open Dashboard
           </button>
