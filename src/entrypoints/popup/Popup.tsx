@@ -56,6 +56,8 @@ function PopupPage() {
     return path ? browser.runtime.getURL(path) : "";
   }, []);
 
+  const [hasDashboardTab, setHasDashboardTab] = useState(false);
+
   useEffect(() => {
     const checkActiveTab = async () => {
       const [tab] = await browser.tabs.query({
@@ -74,7 +76,18 @@ function PopupPage() {
       setIsOnOptionsPage(isSameExtensionPage(url, optionsUrl));
     };
 
+    const checkHasDashboardTab = async () => {
+      const tabs = await browser.tabs.query({});
+      const existingTab = tabs.find((tab) => {
+        const url = tab.url ?? "";
+        return isSameExtensionPage(url, optionsUrl);
+      });
+
+      setHasDashboardTab(!!existingTab);
+    };
+
     checkActiveTab();
+    checkHasDashboardTab();
   }, [optionsUrl]);
 
   const openOrFocusToResponsiveDeck = async () => {
@@ -107,37 +120,77 @@ function PopupPage() {
   return (
     <section className="px-8 py-6  min-w-80 max-w-90 mx-auto">
       <div className="text-center">
-        <h1 className="text-xl mb-2 ">Currently active URL </h1>
-
         {isloading && (
           <Loader className="text-primary animate-spin [animation-duration:1.6s]" />
         )}
         {error && <p className="text-sm text-red-500">{error}</p>}
+
         {!isloading && !error && (
           <div className={""}>
-            <p className="text-sm text-gray-500 font-roboto_mono text-center  text-ellipsis truncate ">
-              {currentTabUrl}
-            </p>
+            {isOnOptionsPage && (
+              <div>
+                <h1 className="text-xl mb-2 "> Responsive Deck </h1>
+                <p>You are on the main page</p>
+              </div>
+            )}
+
+            {hasDashboardTab && !isOnOptionsPage && (
+              <div>
+                <h1 className="text-xl mb-2 "> Responsive Deck Available </h1>
+                <p className="text-sm text-black text-center ">
+                  You already have the Responsive Deck opened in another tab
+                </p>
+              </div>
+            )}
+
+            {!hasDashboardTab && !isOnOptionsPage && (
+              <div>
+                <h1 className="text-xl mb-2 ">Currently active URL </h1>
+                <p className="text-sm text-gray-500 font-roboto_mono text-center  text-ellipsis truncate ">
+                  {currentTabUrl}
+                </p>
+              </div>
+            )}
           </div>
         )}
       </div>
 
       {!error && !isloading && (
-        <div className="mt-6 flex items-center justify-center gap-2">
-          <button
-            className="py-2 px-4 bg-tertiary text-white font-poppins text-sm cursor-pointer rounded-md
+        <>
+          {isOnOptionsPage && (
+            <div className="mt-6 flex items-center justify-center gap-2"></div>
+          )}
+
+          {hasDashboardTab && !isOnOptionsPage && (
+            <div className="mt-6 w-full ">
+              <button
+                className="py-2 px-4 bg-primary text-white font-poppins text-sm cursor-pointer rounded-md w-full
           "
-          >
-            Go with current URL
-          </button>
-          <button
-            className="py-2 px-4 bg-primary text-white font-poppins text-sm cursor-pointer rounded-md
+                onClick={openOrFocusToResponsiveDeck}
+              >
+                Go to Dashboard
+              </button>
+            </div>
+          )}
+
+          {!hasDashboardTab && !isOnOptionsPage && (
+            <div className="mt-6 flex items-center justify-center gap-2">
+              <button
+                className="py-2 px-4 bg-tertiary text-white font-poppins text-sm cursor-pointer rounded-md
           "
-            onClick={openOrFocusToResponsiveDeck}
-          >
-            Open Dashboard
-          </button>
-        </div>
+              >
+                Go with current URL
+              </button>
+              <button
+                className="py-2 px-4 bg-primary text-white font-poppins text-sm cursor-pointer rounded-md
+          "
+                onClick={openOrFocusToResponsiveDeck}
+              >
+                Open Dashboard
+              </button>
+            </div>
+          )}
+        </>
       )}
     </section>
   );
