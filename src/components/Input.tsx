@@ -1,3 +1,4 @@
+import { useGetResponsiveDeckState } from "@/hooks/global/globalState";
 import { normalizeLooseUrl } from "@/utils/inputValidation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -21,6 +22,11 @@ const formSchema = z.object({
 type FormSchema = z.infer<typeof formSchema>;
 
 export function Input() {
+  const updateIsUrlValid = useGetResponsiveDeckState(
+    (state) => state.updateIsUrlValid,
+  );
+  const updateUrl = useGetResponsiveDeckState((state) => state.updateUrl);
+
   const {
     register,
     handleSubmit,
@@ -32,7 +38,8 @@ export function Input() {
   });
 
   const onSubmit = handleSubmit((data: FormSchema) => {
-    console.log("Testing ", data);
+    updateIsUrlValid(true);
+    updateUrl(data.url);
   });
 
   return (
