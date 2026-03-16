@@ -15,12 +15,36 @@ export default function ResponsiveDeck() {
 
   return (
     <main className="bg-bg-primary  min-h-screen py-3 px-4">
-      <section className={""}>
-        <Input />
-      </section>
+      <header className={"flex gap-4"}>
+        <div className={"w-full"}>
+          <Input />
+        </div>
 
+        {/* Start of: The Zoom Slider Control */}
+
+        {isUrlValid && url && (
+          <div className="flex items-center gap-3 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200">
+            <span className="text-sm text-gray-500 font-medium">Zoom</span>
+            <input
+              type="range"
+              min="0.2"
+              max="1"
+              step="0.1"
+              value={zoom}
+              onChange={(e) => setZoom(parseFloat(e.target.value))}
+              className="w-24 accent-blue-600"
+            />
+            <span className="text-sm text-gray-700 w-8 text-right font-mono">
+              {Math.round(zoom * 100)}%
+            </span>
+          </div>
+        )}
+
+        {/* End of: The Zoom Slider Control */}
+      </header>
+
+      {/* Start of: Grid/Deck Section */}
       <section aria-label="Deck Grid Preview">
-        {/* Grid/Deck Section */}
         {isUrlValid && url ? (
           <section className="flex-1 overflow-x-auto overflow-y-auto custom-scrollbar p-8">
             <div className="flex flex-row items-start justify-start gap-6 min-w-max h-full">
@@ -30,7 +54,6 @@ export default function ResponsiveDeck() {
 
                 return (
                   <div key={device.id} className="flex flex-col gap-3">
-                    {/* Device Header (Like ResponsivelyApp) */}
                     <div className="flex items-center gap-2 px-1">
                       <span className="text-gray-700 font-medium text-base">
                         {device.name}
@@ -87,6 +110,8 @@ export default function ResponsiveDeck() {
             </div>
           </section>
         )}
+
+        {/* End of: Grid/Deck Section */}
       </section>
     </main>
   );
