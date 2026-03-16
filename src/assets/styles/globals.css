@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./fonts.css";
+@import "./shadcn.css";
 
 :root {
   padding: 0;
@@ -17,6 +18,7 @@
   --color-grey-secondary: #f2f4f7;
 
   --color-bg-primary: #e1e8f1;
+  --color-bg-secondary: #b0bfd1;
 
   --font-roboto_mono: "Roboto Mono", monospace;
   --font-poppins: "Poppins", sans-serif;

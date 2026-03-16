@@ -1,6 +1,11 @@
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/base/ui/Tooltip";
 import { Input } from "@/components/Input";
 import { useGetResponsiveDeckState } from "@/hooks/global/globalState";
-import { Globe } from "lucide-react";
+import { Cable, Globe, Unplug } from "lucide-react";
 
 const DEVICES = [
   { id: "mobile", name: "iPhone 6/7/8", width: 375, height: 667 },
@@ -13,6 +18,11 @@ export default function ResponsiveDeck() {
   const { url, isUrlValid } = useGetResponsiveDeckState();
 
   const [zoom, setZoom] = useState(0.6);
+  const [toggleScrollSync, setToggleScrollSync] = useState(false);
+
+  const handleToggleSync = () => {
+    setToggleScrollSync((prev) => !prev);
+  };
 
   return (
     <main className="bg-bg-primary  min-h-screen py-3 px-4">
@@ -23,7 +33,7 @@ export default function ResponsiveDeck() {
 
         {/* Start of: The Zoom Slider Control */}
 
-        <div className="flex items-center gap-3 bg-white px-4 py-1 rounded-full border border-gray-200 h-head-navigation">
+        <div className="flex items-center gap-3  px-1 py-1 rounded-full border border-gray-200 h-head-navigation">
           <span className="text-sm text-gray-500 font-medium">Zoom</span>
           <input
             type="range"
@@ -40,6 +50,35 @@ export default function ResponsiveDeck() {
         </div>
 
         {/* End of: The Zoom Slider Control */}
+
+        {/* Start of: Scroll Sync toggle */}
+
+        <Tooltip>
+          <TooltipTrigger
+            render={
+              <button
+                onClick={handleToggleSync}
+                className={`max-h-head-navigation  px-1 py-0.5 rounded-sm ${toggleScrollSync ? "bg-bg-secondary" : ""}`}
+              >
+                <Cable color="#3A4658" size={22} />
+              </button>
+            }
+          >
+            Hover
+          </TooltipTrigger>
+          <TooltipContent
+            className={"bg-white"}
+            arrowClassName="bg-white fill-white"
+          >
+            {toggleScrollSync ? (
+              <p className="text-[12px] text-gray-700">Scroll Sync Enabled</p>
+            ) : (
+              <p className="text-[12px] text-gray-700">Scroll Sync Disabled</p>
+            )}
+          </TooltipContent>
+        </Tooltip>
+
+        {/* End of: Scroll Sync toggle */}
       </header>
 
       {/* Start of: Grid/Deck Section */}
