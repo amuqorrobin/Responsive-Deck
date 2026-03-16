@@ -80,6 +80,7 @@ export default function ResponsiveDeck() {
                           transformOrigin: "top left",
                           border: "none",
                         }}
+                        sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
                         className="absolute top-0 left-0 bg-white"
                       />
                     </div>
