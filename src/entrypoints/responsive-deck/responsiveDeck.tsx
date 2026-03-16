@@ -51,6 +51,10 @@ export default function ResponsiveDeck() {
 
         {/* End of: The Zoom Slider Control */}
 
+        {/* Start of: divider */}
+        <div className="h-5 w-px bg-gray-400 my-auto" />
+        {/* End of: divider */}
+
         {/* Start of: Scroll Sync toggle */}
 
         <Tooltip>
