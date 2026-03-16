@@ -22,6 +22,8 @@
   --font-poppins: "Poppins", sans-serif;
   --font-inter: "Inter", sans-serif;
   --font-pt-sans: "PT Sans", sans-serif;
+
+  --spacing-head-navigation: 32px;
 }
 
 body {

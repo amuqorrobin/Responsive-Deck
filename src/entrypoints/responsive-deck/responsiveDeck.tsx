@@ -16,30 +16,28 @@ export default function ResponsiveDeck() {
 
   return (
     <main className="bg-bg-primary  min-h-screen py-3 px-4">
-      <header className={"flex gap-4"}>
+      <header className={"flex gap-2"}>
         <div className={"w-full"}>
           <Input />
         </div>
 
         {/* Start of: The Zoom Slider Control */}
 
-        {isUrlValid && url && (
-          <div className="flex items-center gap-3 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200">
-            <span className="text-sm text-gray-500 font-medium">Zoom</span>
-            <input
-              type="range"
-              min="0.2"
-              max="1"
-              step="0.1"
-              value={zoom}
-              onChange={(e) => setZoom(parseFloat(e.target.value))}
-              className="w-24 accent-blue-600"
-            />
-            <span className="text-sm text-gray-700 w-8 text-right font-mono">
-              {Math.round(zoom * 100)}%
-            </span>
-          </div>
-        )}
+        <div className="flex items-center gap-3 bg-white px-4 py-1 rounded-full border border-gray-200 h-head-navigation">
+          <span className="text-sm text-gray-500 font-medium">Zoom</span>
+          <input
+            type="range"
+            min="0.2"
+            max="1"
+            step="0.1"
+            value={zoom}
+            onChange={(e) => setZoom(parseFloat(e.target.value))}
+            className="w-24 accent-blue-600"
+          />
+          <span className="text-sm text-gray-700 w-8 text-right font-mono">
+            {Math.round(zoom * 100)}%
+          </span>
+        </div>
 
         {/* End of: The Zoom Slider Control */}
       </header>
