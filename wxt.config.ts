@@ -1,12 +1,13 @@
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "wxt";
+import { EXTENSION_NAME } from "./src/utils/const";
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
   modules: ["@wxt-dev/module-react"],
   srcDir: "src",
   manifest: {
-    name: "Responsive Deck",
+    name: `${EXTENSION_NAME}`,
     description:
       "Frontend Responsive Tools for Security Paranoid and Prominent User Experience",
     permissions: ["activeTab", "tabs", "declarativeNetRequest"],
