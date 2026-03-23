@@ -2,6 +2,7 @@ import { useGetResponsiveDeckState } from "@/hooks/global/globalState";
 import { normalizeLooseUrl } from "@/utils/inputValidation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { EXTENSION_VARIABLES } from "@/utils/const";
 import z from "zod";
 
 const formSchema = z.object({
