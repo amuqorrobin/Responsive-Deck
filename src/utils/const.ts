@@ -6,5 +6,9 @@ export const EXTENSION_MESSAGES = {
 };
 
 export const EXTENSION_VARIABLES = {
-  STORAGE_KEY: "targetDeckUrl",
+  STORAGE_KEY: "responsive-deck-URL",
+};
+
+export const EXTENSION_PORTS = {
+  DECK_CONNECTION: "DECK-CONNECTION",
 };
