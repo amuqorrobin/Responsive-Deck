@@ -5,7 +5,11 @@ import {
 } from "@/components/base/ui/Tooltip";
 import { Input } from "@/components/Input";
 import { useGetResponsiveDeckState } from "@/hooks/global/globalState";
-import { EXTENSION_MESSAGES, EXTENSION_VARIABLES } from "@/utils/const";
+import {
+  EXTENSION_MESSAGES,
+  EXTENSION_VARIABLES,
+  EXTENSION_PORTS,
+} from "@/utils/const";
 import { Cable, Globe, Unplug } from "lucide-react";
 
 const DEVICES = [
@@ -62,6 +66,12 @@ export default function ResponsiveDeck() {
         }
       });
   }, [updateUrl, updateIsUrlValid]);
+
+  useEffect(() => {
+    const port = browser.runtime.connect({
+      name: EXTENSION_PORTS.DECK_CONNECTION,
+    });
+  }, []);
 
   return (
     <main className="bg-bg-primary  min-h-screen py-3 px-4">
