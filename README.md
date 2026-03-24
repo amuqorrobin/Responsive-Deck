@@ -79,7 +79,6 @@ Want to contribute or run the tool locally? It's incredibly easy to set up.
 1. **Clone the repository:**
 
    ```bash
-   git clone [https://github.com/yourusername/responsive-deck.git](https://github.com/yourusername/responsive-deck.git)
    cd responsive-deck
    ```
 
