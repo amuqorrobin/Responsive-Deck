@@ -22,7 +22,7 @@
 
 ## 🏗️ Architecture Overview
 
-Building a responsive checker as a browser extension (instead of a desktop app) presents severe browser-security challenges. Responsive Deck solves these using advanced Manifest V3 capabilities:
+<!-- Building a responsive checker as a browser extension (instead of a desktop app) presents severe browser-security challenges. Responsive Deck solves these using advanced Manifest V3 capabilities: -->
 
 ### 1. The `X-Frame-Options` Bypass (declarativeNetRequest)
 
