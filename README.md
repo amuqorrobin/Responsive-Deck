@@ -42,7 +42,7 @@ To keep the tool lightweight and non-intrusive, Responsive Deck renders its `ifr
 
 ## 🔒 Privacy & Security First
 
-Responsive Deck was built with a paranoid focus on security. It is purely a local developer tool. **It does not collect, store, or transmit any personal data, analytics, or browsing history to external servers.** Any data required to make the extension function (such as using `browser.storage.local` to pass your active tab's URL to the dashboard) is kept strictly on your local machine and is **wiped immediately** the moment you close the dashboard. You can audit the source code here to verify this.
+Responsive Deck was built with a paranoid focus on security. It is purely a local developer tool that I have been using locally before I decided to wrap it with WXT framework and publish it in regards of helping other developers. **It does not collect, store, or transmit any personal data, analytics, or browsing history to external servers.** Any data required to make the extension function (such as using `browser.storage.local` to pass your active tab's URL to the dashboard) is kept strictly on your local machine and is **wiped immediately** the moment you close the dashboard. You can audit the source code here to verify this.
 
 ---
 
