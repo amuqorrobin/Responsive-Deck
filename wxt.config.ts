@@ -11,6 +11,7 @@ export default defineConfig({
     description:
       "Frontend Responsive Tools for Security Paranoid and Prominent User Experience",
     permissions: ["activeTab", "tabs", "declarativeNetRequest", "storage"],
+    version: "1.0.0",
     action: {},
     host_permissions: ["http://*/*", "https://*/*"],
   },
