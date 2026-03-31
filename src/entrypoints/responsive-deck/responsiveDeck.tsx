@@ -135,9 +135,9 @@ export default function ResponsiveDeck() {
       </header>
 
       {/* Start of: Grid/Deck Section */}
-      <section aria-label="Deck Grid Preview">
+      <section aria-label="Deck Grid Preview" className="h-full">
         {isUrlValid && url ? (
-          <section className="flex-1 overflow-x-auto overflow-y-auto custom-scrollbar p-8">
+          <section className="flex-1 h-screen no-scrollbar overflow-x-auto overflow-y-auto  p-8">
             <div className="flex flex-row items-start justify-start gap-6 min-w-max h-full">
               {DEVICES.map((device) => {
                 const scaledWidth = device.width * zoom;
@@ -192,7 +192,7 @@ export default function ResponsiveDeck() {
               </p>
             </div>
 
-            <section className="flex-1 overflow-x-auto overflow-y-auto custom-scrollbar p-8">
+            <section className="flex-1 h-screen no-scrollbar overflow-x-auto overflow-y-auto  p-8">
               <div className="flex flex-row items-start justify-start gap-6 min-w-max h-full">
                 {DEVICES.map((device) => {
                   const scaledWidth = device.width * zoom;
